@@ -16,6 +16,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
+import Button from "@material-ui/core/Button";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     })
   },
   menuButton: {
-    marginRight: 36
+    marginRight: theme.spacing(2)
   },
   hide: {
     display: "none"
@@ -119,8 +120,8 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <div style={{ position: "absolute", left: "50%" }}>
-            <button>sd</button>
-            <button>sd</button>
+            <Button color="inherit">Login</Button>
+            <Button color="inherit">Login</Button>
           </div>
           <Typography variant="h6" noWrap>
             {itemSelected}
