@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -13,12 +14,12 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import MenuItem from "@material-ui/core/MenuItem";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
-import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
+
 import Button from "@material-ui/core/Button";
-import reactIcon from "../../img/react.png";
-import { Icon } from "@material-ui/core";
+
+import ReactPage from "../pages/ReactPage";
+import CplusplusPage from "../pages/C++Page";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -101,102 +102,188 @@ export default function MiniDrawer() {
   };
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <div style={{ position: "absolute", left: "50%" }}>
-            <Button color="inherit">Login</Button>
-            <Button color="inherit">Login</Button>
-          </div>
-          <Typography variant="h6" noWrap>
-            {itemSelected}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
-        })}
-        classes={{
-          paper: clsx({
+    <Router>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open
+          })}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
+            <div
+              style={{
+                position: "absolute",
+                left: "50%"
+              }}
+            >
+              <Link to="/um-meg" style={{ textDecoration: "none" }}>
+                <img
+                  onClick={() => {
+                    handleClick("Um meg");
+                  }}
+                  style={{ height: "24px", width: "24px", marginRight: "25px" }}
+                  src={require("../../img/aboutMe.png")}
+                />
+              </Link>
+              <Link to="/lesnaður" style={{ textDecoration: "none" }}>
+                <img
+                  onClick={() => {
+                    handleClick("study");
+                  }}
+                  style={{ height: "24px", width: "24px", marginRight: "25px" }}
+                  src={require("../../img/study.png")}
+                />
+              </Link>{" "}
+              <Link to="/arbeiðsroyndir" style={{ textDecoration: "none" }}>
+                <img
+                  onClick={() => {
+                    handleClick("work");
+                  }}
+                  style={{ height: "24px", width: "24px", marginRight: "25px" }}
+                  src={require("../../img/work.png")}
+                />
+              </Link>
+              <Link to="/samband" style={{ textDecoration: "none" }}>
+                <img
+                  onClick={() => {
+                    handleClick("contact");
+                  }}
+                  style={{ height: "24px", width: "24px" }}
+                  src={require("../../img/contact.png")}
+                />
+              </Link>
+            </div>
+
+            <Typography variant="h6" noWrap>
+              {itemSelected}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open
-          })
-        }}
-        open={open}
-      >
-        <div className={classes.toolbar}>
-          Projects
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </div>
-        <Divider />
-        <MenuItem
-          onClick={() => {
-            handleClick("React");
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open
+            })
           }}
+          open={open}
         >
-          <ListItemIcon>
-            <img
-              style={{ height: "24px", width: "24px" }}
-              src={require("../../img/react.png")}
-            />
-          </ListItemIcon>
-
-          <Typography>React</Typography>
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleClick("C++");
-          }}
-        >
-          <ListItemIcon>
-            <PriorityHighIcon fontSize="small" />
-          </ListItemIcon>
-          <Typography variant="inherit">C++</Typography>
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleClick("Shell Script");
-          }}
-        >
-          {" "}
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
-          </ListItemIcon>
-          <Typography component={"span"} variant="inherit" noWrap>
-            Shell Scripts
-          </Typography>
-        </MenuItem>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        TEXT HERE
-      </main>
-    </div>
+          <div className={classes.toolbar}>
+            Projects
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </div>
+          <Divider />
+          <Link to="/react" style={{ textDecoration: "none" }}>
+            <MenuItem
+              onClick={() => {
+                handleClick("React");
+              }}
+            >
+              <ListItemIcon>
+                <img
+                  style={{ height: "24px", width: "24px" }}
+                  src={require("../../img/react.png")}
+                />
+              </ListItemIcon>
+              <div variant="inherit">React</div>
+            </MenuItem>
+          </Link>
+          <Link to="/c++" style={{ textDecoration: "none" }}>
+            <MenuItem
+              onClick={() => {
+                handleClick("C++");
+              }}
+            >
+              <ListItemIcon>
+                <img
+                  style={{ height: "24px", width: "24px" }}
+                  src={require("../../img/c++.png")}
+                />
+              </ListItemIcon>
+              <Typography variant="inherit">C++</Typography>
+            </MenuItem>
+          </Link>
+          <MenuItem
+            onClick={() => {
+              handleClick("Shell Script");
+            }}
+          >
+            {" "}
+            <ListItemIcon>
+              <img
+                style={{ height: "24px", width: "24px" }}
+                src={require("../../img/sh.png")}
+              />
+            </ListItemIcon>
+            <Typography component={"span"} variant="inherit" noWrap>
+              Shell Scripts
+            </Typography>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleClick("Android Studio");
+            }}
+          >
+            {" "}
+            <ListItemIcon>
+              <img
+                style={{ height: "24px", width: "24px" }}
+                src={require("../../img/androidStudio.png")}
+              />
+            </ListItemIcon>
+            <Typography component={"span"} variant="inherit" noWrap>
+              Android Studio
+            </Typography>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleClick("Arduino");
+            }}
+          >
+            {" "}
+            <ListItemIcon>
+              <img
+                style={{ height: "24px", width: "24px" }}
+                src={require("../../img/arduino.png")}
+              />
+            </ListItemIcon>
+            <Typography component={"span"} variant="inherit" noWrap>
+              Arduino
+            </Typography>
+          </MenuItem>
+        </Drawer>
+        <Switch>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Route exact path="/react" component={ReactPage}></Route>
+            <Route exact path="/c++" component={CplusplusPage}></Route>
+          </main>
+        </Switch>
+      </div>
+    </Router>
   );
 }
