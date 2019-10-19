@@ -17,6 +17,8 @@ import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
 import Button from "@material-ui/core/Button";
+import reactIcon from "../../img/react.png";
+import { Icon } from "@material-ui/core";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -159,8 +161,12 @@ export default function MiniDrawer() {
           }}
         >
           <ListItemIcon>
-            <SendIcon fontSize="small" />
+            <img
+              style={{ height: "24px", width: "24px" }}
+              src={require("../../img/react.png")}
+            />
           </ListItemIcon>
+
           <Typography>React</Typography>
         </MenuItem>
         <MenuItem
